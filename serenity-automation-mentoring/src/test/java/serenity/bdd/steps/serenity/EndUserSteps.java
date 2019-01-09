@@ -4,6 +4,8 @@ import serenity.bdd.pages.DictionaryPage;
 import net.thucydides.core.annotations.Step;
 import net.thucydides.core.steps.ScenarioSteps;
 
+import java.util.Map;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasItem;
@@ -11,6 +13,7 @@ import static org.hamcrest.Matchers.hasItem;
 public class EndUserSteps {
 
     DictionaryPage dictionaryPage;
+    private Map<String, String> table;
 
     @Step
     public void enters(String keyword) {
@@ -36,5 +39,18 @@ public class EndUserSteps {
     public void looks_for(String term) {
         enters(term);
         starts_search();
+    }
+
+    @Step
+    public void save_table(Map<String, String> table) {
+        this.table = table;
+    }
+
+    @Step
+    public void check_table() {
+        for (Map.Entry<String, String> checkPair: table.entrySet()){
+            looks_for(checkPair.getKey());
+            should_see_definition(checkPair.getValue());
+        }
     }
 }
