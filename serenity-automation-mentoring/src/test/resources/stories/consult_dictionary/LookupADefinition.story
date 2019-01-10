@@ -22,6 +22,15 @@ Given the user is on the Wikionary home page
 When the user looks up the definition of the word 'pear'
 Then they should see the definition 'An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.'
 
+Scenario: Looking up the definition of 'pear' and 'apple'
+Given the user is on the Wikionary home page
+When the user looks up the definition of the word in table
+|word |definition                                                                                    |
+|pear |An edible fruit produced by the pear tree, similar to an apple but elongated towards the stem.|
+|apple|A common, round fruit produced by the tree Malus domestica, cultivated in temperate climates. |
+Then they should see the definition in table
+
+
 Scenario: Looking up the definition of words list 'student', 'table', 'desk'
 Given the user is on the Wikionary home page
 When the user looks up the definition of the word list <word>
