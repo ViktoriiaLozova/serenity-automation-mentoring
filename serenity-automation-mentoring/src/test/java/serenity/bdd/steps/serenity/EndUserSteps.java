@@ -1,8 +1,10 @@
 package serenity.bdd.steps.serenity;
 
+import serenity.EnvironmentPropertyLoader;
 import serenity.bdd.pages.DictionaryPage;
 import net.thucydides.core.annotations.Step;
-import net.thucydides.core.steps.ScenarioSteps;
+import serenity.bdd.pages.PetStorePage;
+import serenity.models.Pet;
 
 import java.util.Map;
 
@@ -13,7 +15,10 @@ import static org.hamcrest.Matchers.hasItem;
 public class EndUserSteps {
 
     DictionaryPage dictionaryPage;
+    PetStorePage petStorePage = new PetStorePage();
+
     private Map<String, String> table;
+
 
     @Step
     public void enters(String keyword) {
@@ -52,5 +57,33 @@ public class EndUserSteps {
             looks_for(checkPair.getKey());
             should_see_definition(checkPair.getValue());
         }
+    }
+
+    @Step
+    public void create_pet(String petName, String status) {
+        Pet pet = Pet.createBarsik();
+        pet.setName(petName);
+        pet.setStatus(status);
+        petStorePage.createPet(pet);
+    }
+
+    @Step
+    public void verify_response_code() {
+        petStorePage.verifyResponseCodeOk();
+    }
+
+    @Step
+    public void find_by_status(String status) {
+        petStorePage.getPetByStatus(status);
+    }
+
+    @Step
+    public void delete_by_current_id() {
+        petStorePage.deleteByCurrentId();
+    }
+
+    @Step
+    public String getProperty(String propertyName) {
+        return EnvironmentPropertyLoader.getProperty(propertyName);
     }
 }

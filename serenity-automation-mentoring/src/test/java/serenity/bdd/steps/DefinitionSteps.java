@@ -6,8 +6,7 @@ import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
 import org.jbehave.core.model.ExamplesTable;
-import org.junit.Ignore;
-import org.yecht.Data;
+import serenity.EnvironmentPropertyLoader;
 import serenity.bdd.steps.serenity.EndUserSteps;
 
 import java.util.HashMap;
@@ -25,12 +24,12 @@ public class DefinitionSteps {
 
     @When("the user looks up the definition of the word '$word'")
     public void whenTheUserLooksUpTheDefinitionOf(String word) {
-        endUser.looks_for(word);
+        endUser.looks_for(endUser.getProperty(word));
     }
 
     @Then("they should see the definition '$definition'")
     public void thenTheyShouldSeeADefinitionContainingTheWords(String definition) {
-        endUser.should_see_definition(definition);
+        endUser.should_see_definition(endUser.getProperty(definition));
     }
 
     @When("the user looks up the definition of the word list $word")
@@ -59,5 +58,24 @@ public class DefinitionSteps {
     public void thenTheyShouldSeeADefinitionContainingTheWordsInTable() {
        endUser.check_table();
     }
+//Pet
+    @Given("create pet with $name and $status")
+    public void createPetWithNameAndStatus(String name, String status) {
+        endUser.create_pet(endUser.getProperty(name), endUser.getProperty(status));
+    }
 
+    @When("find pet by status $status")
+    public void findPetByStatus(String status) {
+        endUser.find_by_status(status);
+    }
+
+    @When("delete pet by current id")
+    public void deletePetByCurrentId() {
+        endUser.delete_by_current_id();
+    }
+
+    @Then("check response code")
+    public void checkResponseCode() {
+        endUser.verify_response_code();
+    }
 }

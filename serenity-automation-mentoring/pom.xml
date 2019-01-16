@@ -16,24 +16,24 @@
     </properties>
 
     <repositories>
-      <repository>
-        <snapshots>
-        <enabled>false</enabled>
-        </snapshots>
-        <id>central</id>
-        <name>bintray</name>
-        <url>http://jcenter.bintray.com</url>
-      </repository>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>bintray</name>
+            <url>http://jcenter.bintray.com</url>
+        </repository>
     </repositories>
     <pluginRepositories>
-      <pluginRepository>
-        <snapshots>
-        <enabled>false</enabled>
-        </snapshots>
-        <id>central</id>
-        <name>bintray-plugins</name>
-        <url>http://jcenter.bintray.com</url>
-      </pluginRepository>
+        <pluginRepository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>central</id>
+            <name>bintray-plugins</name>
+            <url>http://jcenter.bintray.com</url>
+        </pluginRepository>
     </pluginRepositories>
 
     <dependencies>
@@ -48,6 +48,11 @@
             <artifactId>serenity-jbehave</artifactId>
             <version>${serenity.jbehave.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.serenity-bdd</groupId>
+            <artifactId>serenity-rest-assured</artifactId>
+            <version>${serenity.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -69,6 +74,12 @@
                 <version>2.19.1</version>
                 <configuration>
                     <skip>true</skip>
+                    <systemProperties>
+                        <property>
+                            <name>java.util.logging.config.file</name>
+                            <value>src/test/resources/simplelogger.properties</value>
+                        </property>
+                    </systemProperties>
                 </configuration>
             </plugin>
             <plugin>
