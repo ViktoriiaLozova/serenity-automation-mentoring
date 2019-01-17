@@ -1,4 +1,4 @@
-package serenity.bdd.pages;
+package serenity.endpoints;
 
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -8,7 +8,7 @@ import org.apache.http.HttpHeaders;
 import serenity.Config;
 import serenity.models.Pet;
 
-public class PetStorePage {
+public class PetStoreEndPoint {
     private Response response;
     private long currentPetId = -1;
 
@@ -42,8 +42,8 @@ public class PetStorePage {
     }
 
     @Step("verify response code ok")
-    public void verifyResponseCodeOk() {
-        response.then().statusCode(200);
+    public void verifyResponseCodeOk(int code) {
+        response.then().statusCode(code);
     }
 
     private RequestSpecification given() {

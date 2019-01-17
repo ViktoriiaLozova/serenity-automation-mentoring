@@ -3,7 +3,7 @@ package serenity.bdd.steps.serenity;
 import serenity.EnvironmentPropertyLoader;
 import serenity.bdd.pages.DictionaryPage;
 import net.thucydides.core.annotations.Step;
-import serenity.bdd.pages.PetStorePage;
+import serenity.endpoints.PetStoreEndPoint;
 import serenity.models.Pet;
 
 import java.util.Map;
@@ -15,7 +15,7 @@ import static org.hamcrest.Matchers.hasItem;
 public class EndUserSteps {
 
     DictionaryPage dictionaryPage;
-    PetStorePage petStorePage = new PetStorePage();
+    PetStoreEndPoint petStoreEndPoint = new PetStoreEndPoint();
 
     private Map<String, String> table;
 
@@ -64,22 +64,22 @@ public class EndUserSteps {
         Pet pet = Pet.createBarsik();
         pet.setName(petName);
         pet.setStatus(status);
-        petStorePage.createPet(pet);
+        petStoreEndPoint.createPet(pet);
     }
 
     @Step
-    public void verify_response_code() {
-        petStorePage.verifyResponseCodeOk();
+    public void verify_response_code(int code) {
+        petStoreEndPoint.verifyResponseCodeOk(code);
     }
 
     @Step
     public void find_by_status(String status) {
-        petStorePage.getPetByStatus(status);
+        petStoreEndPoint.getPetByStatus(status);
     }
 
     @Step
     public void delete_by_current_id() {
-        petStorePage.deleteByCurrentId();
+        petStoreEndPoint.deleteByCurrentId();
     }
 
     @Step

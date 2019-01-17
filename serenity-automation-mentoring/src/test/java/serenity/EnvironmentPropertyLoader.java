@@ -23,8 +23,8 @@ public class EnvironmentPropertyLoader {
                 this.loadProperties("environments/" + System.getProperty(ENVIRONMENT_CONFIG_SYSTEM_PROPERTY));
             }
 
-        } catch (IOException var2) {
-            throw new IllegalStateException("Failed to load configuration file", var2);
+        } catch (IOException e) {
+            throw new IllegalStateException("Failed to load configuration file", e);
         }
     }
 

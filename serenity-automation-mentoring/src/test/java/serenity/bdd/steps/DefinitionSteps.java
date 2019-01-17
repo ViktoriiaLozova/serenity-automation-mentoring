@@ -66,7 +66,7 @@ public class DefinitionSteps {
 
     @When("find pet by status $status")
     public void findPetByStatus(String status) {
-        endUser.find_by_status(status);
+        endUser.find_by_status(endUser.getProperty(status));
     }
 
     @When("delete pet by current id")
@@ -74,8 +74,8 @@ public class DefinitionSteps {
         endUser.delete_by_current_id();
     }
 
-    @Then("check response code")
-    public void checkResponseCode() {
-        endUser.verify_response_code();
+    @Then("check response code $code")
+    public void checkResponseCode(String code) {
+        endUser.verify_response_code(Integer.parseInt(endUser.getProperty(code)));
     }
 }
