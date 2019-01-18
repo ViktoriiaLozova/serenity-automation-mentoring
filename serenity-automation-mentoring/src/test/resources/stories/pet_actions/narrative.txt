@@ -1,0 +1,6 @@
+Pet store
+As a user I want to do next actions with Pet:
+- add a new pet to the store
+- find pets by status
+- delete a Pet
+- verify status code
